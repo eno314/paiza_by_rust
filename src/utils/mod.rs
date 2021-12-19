@@ -17,6 +17,12 @@ impl InputReader {
         (0..times).map(|_| InputReader::read_line()).collect()
     }
 
+    pub fn read_lines_splitted_by_whitespace<T: std::str::FromStr>(times: usize) -> Vec<Vec<T>> {
+        (0..times)
+            .map(|_| InputReader::read_line_splitted_by_whitespace())
+            .collect()
+    }
+
     pub fn read_line_splitted_by_whitespace<T: std::str::FromStr>() -> Vec<T> {
         let line: String = InputReader::read_line();
         line.split_whitespace()
