@@ -16,31 +16,31 @@ impl SnakeMapStep3Resolver {
         let mut positions = Vec::new();
 
         let chars: Vec<char> = line.chars().collect();
-        for x in 0..chars.len() {
-            if self.is_target_position_x(&chars, x) {
-                positions.push((x, y_pos));
-            }
-        }
-        return positions;
-    }
-
-    fn is_target_position_x(&self, chars: &Vec<char>, x: usize) -> bool {
         let chars_len = chars.len();
         if chars_len < 2 {
-            return false;
+            return positions;
         }
 
-        if x == 0 {
-            // 先頭なら右隣だけで判定
-            return self.is_target_char(chars[x + 1]);
+        // 先頭が対象かチェック
+        if self.is_target_char(chars[1]) {
+            positions.push((0, y_pos));
         }
 
-        if x == chars_len - 1 {
-            // 最後なら左隣だけで判定
-            return self.is_target_char(chars[x - 1]);
+        // 文字列の中で最初に#が出てくる場所を探し、その2つ右も#だったら、1つ右が対象になる
+        for x in 0..(chars.len() - 2) {
+            if self.is_target_char(chars[x]) {
+                if self.is_target_char(chars[x + 2]) {
+                    positions.push((x + 1, y_pos));
+                }
+            }
         }
 
-        return self.is_target_char(chars[x - 1]) && self.is_target_char(chars[x + 1]);
+        // 最後が対象かチェック
+        if self.is_target_char(chars[chars_len - 2]) {
+            positions.push((chars_len - 1, y_pos));
+        }
+
+        return positions;
     }
 
     fn is_target_char(&self, char: char) -> bool {
@@ -154,5 +154,22 @@ mod tests {
                 "0 0\n0 1\n0 2\n0 3\n1 0\n1 1\n1 2\n1 3\n2 0\n2 1\n2 2\n2 3\n3 0\n3 1\n3 2\n3 3"
             )
         );
+    }
+
+    #[test]
+    fn test_create_output_6() {
+        let input = SnakeMapStep3Input {
+            map: vec![
+                String::from("##"),
+                String::from(".."),
+                String::from("#."),
+                String::from(".#"),
+            ],
+        };
+        let resolver = SnakeMapStep3Resolver {};
+
+        let actual = resolver.create_output(input);
+
+        assert_eq!(actual, String::from("0 0\n0 1\n2 1\n3 0"));
     }
 }
