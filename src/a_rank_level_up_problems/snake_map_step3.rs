@@ -31,12 +31,12 @@ impl SnakeMapStep3Resolver {
         }
 
         if x == 0 {
-            // 先頭なら左隣だけで判定
+            // 先頭なら右隣だけで判定
             return self.is_target_char(chars[x + 1]);
         }
 
         if x == chars_len - 1 {
-            // 最後なら右隣だけで判定
+            // 最後なら左隣だけで判定
             return self.is_target_char(chars[x - 1]);
         }
 
