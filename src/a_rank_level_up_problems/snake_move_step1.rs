@@ -34,14 +34,13 @@ impl SnakeMoveStep1Resolver {
 }
 
 impl utils::Resolver for SnakeMoveStep1Resolver {
-
     type Input = SnakeMoveStep1Input;
 
     fn read_input(&self) -> Self::Input {
-        let first_line: Vec<usize> = utils::InputReader::read_line_splitted_by_whitespace();
+        let first_line: Vec<usize> = self.read_line_splitted_by_whitespace();
         let map_heigh = first_line[0];
         SnakeMoveStep1Input {
-            map: utils::InputReader::read_lines(map_heigh),
+            map: self.read_lines(map_heigh),
             height: map_heigh,
             width: first_line[1],
         }
@@ -53,7 +52,6 @@ impl utils::Resolver for SnakeMoveStep1Resolver {
     }
 }
 
-
 #[cfg(test)]
 mod output_tests {
 
@@ -64,13 +62,11 @@ mod output_tests {
     #[test]
     fn test_create_output_1() {
         let input = SnakeMoveStep1Input {
-            map: vec![
-                String::from("#"),
-            ],
+            map: vec![String::from("#")],
             height: 1,
             width: 1,
         };
-        let resolver = SnakeMoveStep1Resolver{};
+        let resolver = SnakeMoveStep1Resolver {};
 
         let actual = resolver.create_output(input);
 
@@ -88,7 +84,7 @@ mod output_tests {
             height: 3,
             width: 3,
         };
-        let resolver = SnakeMoveStep1Resolver{};
+        let resolver = SnakeMoveStep1Resolver {};
 
         let actual = resolver.create_output(input);
 

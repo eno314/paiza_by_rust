@@ -10,8 +10,8 @@ impl utils::Resolver for FirstResolver {
     type Input = (String, String);
 
     fn read_input(&self) -> Self::Input {
-        let first = utils::InputReader::read_line();
-        let second = utils::InputReader::read_line();
+        let first = self.read_line();
+        let second = self.read_line();
         (first, second)
     }
 

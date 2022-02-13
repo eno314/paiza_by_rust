@@ -9,8 +9,8 @@ impl utils::Resolver for MultiplicationResolver {
     type Input = (u32, u32);
 
     fn read_input(&self) -> Self::Input {
-        let a: u32 = utils::InputReader::read_line();
-        let b: u32 = utils::InputReader::read_line();
+        let a: u32 = self.read_line();
+        let b: u32 = self.read_line();
         (a, b)
     }
 

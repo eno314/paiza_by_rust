@@ -10,11 +10,11 @@ impl utils::Resolver for SecondResolver {
     type Input = SecondInput;
 
     fn read_input(&self) -> Self::Input {
-        let first: Vec<f32> = utils::InputReader::read_line_splitted_by_whitespace();
+        let first: Vec<f32> = self.read_line_splitted_by_whitespace();
         let size = first[0] as usize;
         SecondInput {
             exp_of_fight: first[1],
-            exps_of_chars: utils::InputReader::read_lines(size),
+            exps_of_chars: self.read_lines(size),
         }
     }
 

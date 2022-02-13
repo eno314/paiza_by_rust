@@ -52,10 +52,10 @@ impl utils::Resolver for SnakeMapStep3Resolver {
     type Input = SnakeMapStep3Input;
 
     fn read_input(&self) -> Self::Input {
-        let first_line: Vec<usize> = utils::InputReader::read_line_splitted_by_whitespace();
+        let first_line: Vec<usize> = self.read_line_splitted_by_whitespace();
         let map_heigh = first_line[0];
         SnakeMapStep3Input {
-            map: utils::InputReader::read_lines(map_heigh),
+            map: self.read_lines(map_heigh),
         }
     }
 

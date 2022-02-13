@@ -10,7 +10,7 @@ impl utils::Resolver for FizzBuzzResolver {
     type Input = usize;
 
     fn read_input(&self) -> Self::Input {
-        utils::InputReader::read_line()
+        self.read_line()
     }
 
     fn create_output(&self, input: Self::Input) -> String {

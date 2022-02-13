@@ -8,29 +8,25 @@ pub trait Resolver {
     type Input;
     fn read_input(&self) -> Self::Input;
     fn create_output(&self, input: Self::Input) -> String;
-}
 
-pub struct InputReader;
-
-impl InputReader {
-    pub fn read_lines<T: std::str::FromStr>(times: usize) -> Vec<T> {
-        (0..times).map(|_| InputReader::read_line()).collect()
+    fn read_lines<S: std::str::FromStr>(&self, times: usize) -> Vec<S> {
+        (0..times).map(|_| self.read_line()).collect()
     }
 
-    pub fn read_lines_splitted_by_whitespace<T: std::str::FromStr>(times: usize) -> Vec<Vec<T>> {
+    fn read_lines_splitted_by_whitespace<S: std::str::FromStr>(&self, times: usize) -> Vec<Vec<S>> {
         (0..times)
-            .map(|_| InputReader::read_line_splitted_by_whitespace())
+            .map(|_| self.read_line_splitted_by_whitespace())
             .collect()
     }
 
-    pub fn read_line_splitted_by_whitespace<T: std::str::FromStr>() -> Vec<T> {
-        let line: String = InputReader::read_line();
+    fn read_line_splitted_by_whitespace<S: std::str::FromStr>(&self) -> Vec<S> {
+        let line: String = self.read_line();
         line.split_whitespace()
             .map(|c| c.parse().ok().unwrap())
             .collect()
     }
 
-    pub fn read_line<T: std::str::FromStr>() -> T {
+    fn read_line<S: std::str::FromStr>(&self) -> S {
         let mut s = String::new();
         std::io::stdin().read_line(&mut s).unwrap();
         s.trim().parse().ok().unwrap()

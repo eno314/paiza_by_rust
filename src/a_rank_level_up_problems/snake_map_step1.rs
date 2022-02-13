@@ -23,11 +23,11 @@ impl utils::Resolver for SnakeMapStep1Resolver {
     type Input = SnakeMapStep1Input;
 
     fn read_input(&self) -> Self::Input {
-        let first_line: Vec<usize> = utils::InputReader::read_line_splitted_by_whitespace();
+        let first_line: Vec<usize> = self.read_line_splitted_by_whitespace();
         let (map_heigh, answer_count) = (first_line[0], first_line[2]);
         self.create_input(
-            utils::InputReader::read_lines(map_heigh),
-            utils::InputReader::read_lines_splitted_by_whitespace(answer_count),
+            self.read_lines(map_heigh),
+            self.read_lines_splitted_by_whitespace(answer_count),
         )
     }
 
